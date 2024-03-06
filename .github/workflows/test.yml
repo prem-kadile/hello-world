@@ -1,0 +1,15 @@
+name: Release deploy on UAT App Runner
+on:
+  workflow_dispatch:
+  
+jobs:
+  Backup-DB:
+    runs-on: ubuntu-latest-l
+    steps:
+      - name: Get tag name
+        id: get-tag
+        run: |
+          BRANCH_NAME=${GITHUB_REF#refs/heads/}
+          TAG_NAME=${BRANCH_NAME#*/}
+          echo "Tag name: $TAG_NAME"
+          echo "::set-output name=tag::$TAG_NAME"        
